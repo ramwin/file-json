@@ -12,7 +12,7 @@ all the rules should
 ```
 .file_json.json
 {
-    "type": "time based list",
+    "type": "time_based_list",
     "key": "create_datetime",
 }
 ```
@@ -35,7 +35,7 @@ all the rules should
 ```
 .file_json.json
 {
-    "type": "sorted list",
+    "type": "sorted_list",
     "key": "id",
 }
 ```
