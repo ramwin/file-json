@@ -32,9 +32,13 @@ class Test1(TestCase):
             data_list.append({
                 "create_datetime": "2023-01-01 02:03:04",
             })
+            data_list.append({
+                "create_datetime": "2022-01-01 02:03:04",
+            })
             self.assertEqual(
                 list(data_list),
                 [
+                    {"create_datetime": "2022-01-01 02:03:04"},
                     {"create_datetime": "2023-01-01 02:03:04"},
                 ]
             )
@@ -53,11 +57,13 @@ class Test1(TestCase):
             end = datetime.datetime(2023, 1, 2)
             self.assertEqual(
                 get_data_list[begin],
-                get_data_list[begin:end],
-            )
-            self.assertEqual(
-                get_data_list[begin],
                 [
                     {"create_datetime": "2023-01-01 02:03:04"},
                 ]
+            )
+            self.assertEqual(
+                get_data_list[
+                    datetime.datetime(2022, 1, 1)
+                ] + get_data_list[begin],
+                get_data_list[:end],
             )
