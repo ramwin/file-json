@@ -9,12 +9,16 @@ time base list
 
 
 import datetime
+import logging
 from pathlib import Path
 
 import pydash
 
 from .base import JsonData
 from .utils import load_data, save_data
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 class TimeBaseList(JsonData):
@@ -76,3 +80,6 @@ class TimeBaseList(JsonData):
             new_data = sorted(origin_data + data, key=self.get_datetime)
             save_data(new_data, save_path)
         self._unsaved_data = []
+
+    def __getitem__(self, s):
+        LOGGER.info(s)
