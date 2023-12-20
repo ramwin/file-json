@@ -33,7 +33,7 @@ class Test1(TestCase):
                 "create_datetime": "2023-01-01 02:03:04",
             })
             self.assertEqual(
-                data_list,
+                list(data_list),
                 [
                     {"create_datetime": "2023-01-01 02:03:04"},
                 ]

@@ -83,3 +83,9 @@ class TimeBaseList(JsonData):
 
     def __getitem__(self, s):
         LOGGER.info(s)
+
+    def __iter__(self):
+        self.save()
+        for json_file in sorted(self.path.rglob("*.json.gz")):
+            for item in load_data(json_file):
+                yield item

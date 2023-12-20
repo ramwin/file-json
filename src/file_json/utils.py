@@ -24,7 +24,7 @@ def load_data(path: Path):
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     if path.name.endswith(".json.gz"):
-        with gzip.open(path, encoding="utf-8") as f:
+        with gzip.open(path, mode="rt", encoding="utf-8") as f:
             return json.load(f)
     raise ValueError(f"{path} not endswith .json or .json.gz")
 
