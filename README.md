@@ -67,8 +67,10 @@ all the rules should
 
 ## Features
 * [ ] support time base list
+    * [ ] support datetime with timezone
 * [ ] support huge size of list
 * [ ] support huge size of dict
+* [ ] use filelock to handle concurrency
 
 
 [![PyPI - Version](https://img.shields.io/pypi/v/file-json.svg)](https://pypi.org/project/file-json)
