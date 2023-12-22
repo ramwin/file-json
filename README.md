@@ -65,6 +65,21 @@ all the rules should
 - key3.json.gz
 ```
 
+### AsciiDict
+the key will be used as filename. so special characters should not used in the key
+```
+root_path
+    - .file.json
+    - key1
+        key1_1.json.gz
+        key1_2.json.gz
+    - key2
+        key2_1.json.gz
+        key2_2.json.gz
+    ...
+```
+
+
 ## Features
 * [ ] support time base list
     * [ ] support datetime with timezone

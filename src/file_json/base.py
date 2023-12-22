@@ -47,3 +47,9 @@ class JsonData:
             "type": self.DATA_TYPE,
             "comment": "This file was created by python json file package, Don't edit it manually",
         }
+
+    def save(self):
+        """
+        each type of JsonData should have a strategy to store the json file
+        """
+        raise NotImplementedError
