@@ -8,15 +8,13 @@
 import datetime
 import logging
 import tempfile
-
 from pathlib import Path
 from unittest import TestCase
 
 from file_json.time_base_list import TimeBaseList
+from tests import base  # NOQA pylint: disable=unused-import
 
-logging.basicConfig(level=logging.INFO)
 LOGGER = logging.getLogger(__name__)
-logging.getLogger("file_json").setLevel(logging.INFO)
 
 
 class Test1(TestCase):
