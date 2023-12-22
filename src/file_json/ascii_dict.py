@@ -8,8 +8,10 @@ ascii key dict
 """
 
 
+from typing import List
+
 from .base import JsonData
-from .utils import load_data, save_data
+from .utils import save_data
 
 
 class AsciiDict(JsonData):
@@ -33,7 +35,16 @@ class AsciiDict(JsonData):
     def __init__(self, *args, **kwargs):
         """
         why depth should be 2
-        with a 100M size json, 16key, each key contains 16key. then the file size would be 400kb. which is suitable.
+        for a 100M size json:
+            sub_dir1
+                file1.json.gz
+                file2.json.gz
+                ...
+            sub_dir2
+                file17.json.gz
+            ...
+            sub_dir16
+        each file will be 400KB, it looks good to me
         """
         self.depth = 2
         self._unsaved_data = {}
@@ -42,6 +53,14 @@ class AsciiDict(JsonData):
     def save(self):
         for key, value in self._unsaved_data.items():
             for sub_key, sub_value in value.items():
-                save_path = self.path.joinpath(key, sub_key).with_suffix(".json.gz")
+                save_path = self.get_save_path(key, sub_key)
                 save_data(sub_value, save_path)
         self._unsaved_data = {}
+
+    def get_save_path(self, *keys: List[str]):
+        """
+        get the save path for a key
+        """
+        return self.path.joinpath(
+            *keys).with_suffix(
+                ".json.gz")
