@@ -58,6 +58,10 @@ class AsciiDict(JsonData):
         elif self.depth == 2:
             for key, value in self._unsaved_data.items():
                 if isinstance(value, dict):
+                    if not value:
+                        save_path = self.path.joinpath(key).with_suffix(".json.gz")
+                        save_data(value, save_path)
+                        continue
                     for sub_key, sub_value in value.items():
                         save_path = self.get_save_path(key, sub_key)
                         save_data(sub_value, save_path)
@@ -77,6 +81,13 @@ class AsciiDict(JsonData):
                 ".json.gz")
 
     def __getitem__(self, key):
+        save_path = self.get_save_path(key)
+        if save_path.exists():
+            if save_path.is_file():
+                self._unsaved_data[key] = load_data(save_path)
+                return self._unsaved_data[key]
+            else:
+                return AsciiDict(save_path, depth=self.depth-1)[key]
         if self.depth == 1:
             save_path = self.get_save_path(key)
             if save_path.exists():
